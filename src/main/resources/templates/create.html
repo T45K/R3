@@ -1,0 +1,36 @@
+<html>
+  <title>Summer Short Internship 2019</title>
+  <body>
+    	<h1>
+          Todo Management System
+    	</h1>
+      <h4>2019 Summer Interhship Pre-task</h4>
+
+    <form method="post">
+          <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+            <tr>
+            <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">Text</font></th>
+            <th bgcolor="#EE0000" width="50"><font color="#FFFFFF">Option</font></th>
+            </tr>
+            <tr>
+            <td bgcolor="#FFFFFF" valign="top" width="150">
+              <input type="text" name="text" placeholder="翻訳したい文字列を入力してください。"/>
+            </td>
+            <td bgcolor="#FFFFFF" valign="top" width="200">
+              翻訳元・翻訳先の言語を選択してください。<br>
+              翻訳元
+              <select name="sourceLanguage">
+                <option th:each="lang : ${languages}" th:value="${lang}" th:selected="${lang == sourceLanguage}" th:inline="text">[[${lang}]]</option>
+              </select>
+              翻訳先
+              <select name="targetLanguage">
+                <option th:each="lang : ${languages}" th:value="${lang}" th:selected="${lang == targetLanguage}" th:inline="text">[[${lang}]]</option>
+              </select>
+            </td>
+            </tr>
+        </table>
+        <br>
+        <input type="submit" name="regiter" value="Translate">
+    </form>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+  <title>Summer Short Internship 2019</title>
+  <script type="text/javascript">
+    window.addEventListener('load', function() {
+        document.getElementById('btn').onclick = function() {
+            location.href = './create';
+        };
+    });
+  </script>
+  <body>
+    <h1>
+      Todo Management System
+    </h1>
+    <h4>2019 Summer Interhship Pre-task</h4>
+    
+    <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+        <tr>
+        <th bgcolor="#EE0000"><font color="#FFFFFF">No</font></th>
+        <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">Text</font></th>
+        <th bgcolor="#EE0000" width="50"><font color="#FFFFFF">Option</font></th>
+        <th bgcolor="#EE0000" width="200"><font color="#FFFFFF">TranslatedText</font></th>
+        </tr>
+        <tr th:each="todo:${todos}">
+            <td th:text="${todo.number}"></td>
+            <td th:text="${todo.text}"></td>
+            <td>
+                <span th:text="${todo.sourceLanguage}" />
+                ->
+                <span th:text="${todo.targetLanguage}" /></td>
+            <td th:text="${todo.translatedText}"></td>
+        </tr>
+    </table>
+    <br>
+    <button id="btn" value="Click">Go to the form</button>
+  </body>
+</html>

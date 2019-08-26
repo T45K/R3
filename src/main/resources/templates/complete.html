@@ -1,0 +1,42 @@
+<html>
+  <title>Summer Short Internship 2019</title>
+  <script type="text/javascript">
+    window.addEventListener('load', function() {
+        document.getElementById('btn').onclick = function() {
+            location.href = './';
+        };
+    });
+  </script>
+  <body>
+    	<h1>
+          Todo Management System
+    	</h1>
+      <h4>2019 Summer Interhship Pre-task</h4>
+      Success to translate a text!
+      <form method="post">
+        <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+            <tr>
+            <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">Text</font></th>
+            <th bgcolor="#EE0000" width="50"><font color="#FFFFFF">Option</font></th>
+            <th bgcolor="#EE0000" width="200"><font color="#FFFFFF">TranslatedText</font></th>
+            </tr>
+            <tr>
+                <td name th:text="${todo.text}"></td>
+                <td>
+                    <span th:text="${todo.sourceLanguage}" /> 
+                    ->
+                    <span th:text="${todo.targetLanguage}" />
+                </td>
+                <td th:text="${todo.translatedText}"></td>
+            </tr>
+        </table>
+        <input type="hidden" name="text" th:value="${todo.text}" />
+        <input type="hidden" name="sourceLanguage" th:value="${todo.sourceLanguage}" />
+        <input type="hidden" name="targetLanguage" th:value="${todo.targetLanguage}" />
+        <input type="hidden" name="translatedText" th:value="${todo.translatedText}" />
+      <br>
+      <input type="submit" name="regiter" value="Resigter">
+      </form>
+    <button id="btn" value="Back">Back</button>
+  </body>
+</html>
