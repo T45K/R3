@@ -1,11 +1,7 @@
 package com.rakuten.internship;
 
 import com.rakuten.internship.entity.Request;
-import com.rakuten.internship.entity.Todo;
-import com.rakuten.internship.entity.TranslateLanguages;
 import com.rakuten.internship.service.RequestService;
-import com.rakuten.internship.service.TodoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,15 +30,14 @@ public class TodoController {
     }
 
     @PostMapping("/create")
-    public String createTodo(@ModelAttribute Request request){
+    public String createTodo(@ModelAttribute Request request) {
         requestService.save(request);
-        return "redirect:/viewrequest/"+request.getId();
+        return "redirect:/viewrequest/" + request.getId();
     }
 
     @GetMapping("/viewrequest/{id}")
-    public String viewRequest(@PathVariable("id") long id, Model model){
-        model.addAttribute("req",requestService.findRequestById(id));
+    public String viewRequest(@PathVariable("id") long id, Model model) {
+        model.addAttribute("req", requestService.findRequestById(id));
         return "tmp";
     }
-    
 }
