@@ -9,7 +9,7 @@
 
 ### Features
 - Real time chat
-- Real time nortification
+- Real time notification
 - Navigation
 
 <!-- # skeleton
