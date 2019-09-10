@@ -53,10 +53,10 @@ public class Rescue {
         final double latitudeDelta = this.latitude - latitude;
         final double longitudeDelta = this.longitude - longitude;
 
-        final double sinOfLatitudeDelta = Math.sin(latitudeDelta / 2);
-        final double sinOfLongitudeDelta = Math.sin(longitudeDelta / 2);
+        final double sinOfHalfOfLatitudeDelta = Math.sin(latitudeDelta / 2);
+        final double sinOfHalfOfLongitudeDelta = Math.sin(longitudeDelta / 2);
 
-        final double a = Math.pow(sinOfLatitudeDelta, 2) + Math.cos(latitude) * Math.cos(this.latitude) * Math.pow(sinOfLongitudeDelta, 2);
+        final double a = Math.pow(sinOfHalfOfLatitudeDelta, 2) + Math.cos(latitude) * Math.cos(this.latitude) * Math.pow(sinOfHalfOfLongitudeDelta, 2);
         final double b = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return radius * b;
