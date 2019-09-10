@@ -39,7 +39,6 @@ public class Rescue {
     private boolean isSolved;
 
     /**
-     * see https://www.wolframalpha.com/examples/everyday-life/todays-world/
      * <p>
      * a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
      * c = 2 ⋅ atan2( √a, √(1−a) )
