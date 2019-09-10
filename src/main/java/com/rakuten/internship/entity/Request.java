@@ -25,10 +25,10 @@ public class Request {
     private String language;
 
     @Column(nullable = false)
-    private String latitude;
+    private float latitude;
 
     @Column(nullable = false)
-    private String longitude;
+    private float longitude;
 
     // TODO file upload
     private String image;
