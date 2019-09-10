@@ -1,36 +1,32 @@
+<!DOCTYPE html>
 <html>
-  <title>Summer Short Internship 2019</title>
-  <body>
-    	<h1>
-          Todo Management System
-    	</h1>
-      <h4>2019 Summer Interhship Pre-task</h4>
-
-    <form method="post">
-          <table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
-            <tr>
-            <th bgcolor="#EE0000" width="150"><font color="#FFFFFF">Text</font></th>
-            <th bgcolor="#EE0000" width="50"><font color="#FFFFFF">Option</font></th>
-            </tr>
-            <tr>
-            <td bgcolor="#FFFFFF" valign="top" width="150">
-              <input type="text" name="text" placeholder="翻訳したい文字列を入力してください。"/>
-            </td>
-            <td bgcolor="#FFFFFF" valign="top" width="200">
-              翻訳元・翻訳先の言語を選択してください。<br>
-              翻訳元
-              <select name="sourceLanguage">
-                <option th:each="lang : ${languages}" th:value="${lang}" th:selected="${lang == sourceLanguage}" th:inline="text">[[${lang}]]</option>
-              </select>
-              翻訳先
-              <select name="targetLanguage">
-                <option th:each="lang : ${languages}" th:value="${lang}" th:selected="${lang == targetLanguage}" th:inline="text">[[${lang}]]</option>
-              </select>
-            </td>
-            </tr>
-        </table>
-        <br>
-        <input type="submit" name="regiter" value="Translate">
-    </form>
-  </body>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Real Time Rescue</title>
+<body class="bg-light">
+<div class="container">
+    <div class="row">
+        <h1>
+            Help me!!!!!
+        </h1>
+    </div>
+    <div class="row">
+        <p>Describe your problem</p>
+    </div>
+    <div class="row">
+        <form method="post" action="/create">
+            <label>Title</label><br>
+            <input type="text" name="title" class="form-control"><br>
+            <label>Description</label><br>
+            <textarea name="description" class="form-control"></textarea><br>
+            <label>Language</label><br>
+            <select name="language">
+                <option value="jp">日本語</option>
+                <option value="en">English</option>
+            </select><br>
+            <input class="btn btn-primary btn-lg btn-block" type="submit" name="register" value="Help">
+        </form>
+    </div>
+</div>
+</body>
 </html>
