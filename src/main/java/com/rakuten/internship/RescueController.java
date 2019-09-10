@@ -1,7 +1,7 @@
 package com.rakuten.internship;
 
-import com.rakuten.internship.entity.Request;
-import com.rakuten.internship.service.RequestService;
+import com.rakuten.internship.entity.Rescue;
+import com.rakuten.internship.service.RescueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
  * コントローラーとして使えるように、コードを記入してください。
  */
 @Controller
-public class RequestController {
+public class RescueController {
     @Autowired
-    private RequestService requestService;
+    private RescueService rescueService;
 
     @GetMapping("/")
     public String home() {
@@ -30,14 +30,14 @@ public class RequestController {
     }
 
     @PostMapping("/create")
-    public String createTodo(@ModelAttribute Request request) {
-        requestService.save(request);
-        return "redirect:/viewrequest/" + request.getId();
+    public String createTodo(@ModelAttribute Rescue rescue) {
+        rescueService.save(rescue);
+        return "redirect:/viewrescue/" + rescue.getId();
     }
 
-    @GetMapping("/viewrequest/{id}")
-    public String viewRequest(@PathVariable("id") long id, Model model) {
-        model.addAttribute("request", requestService.findRequestById(id));
-        return "viewrequest";
+    @GetMapping("/viewrescue/{id}")
+    public String viewRescue(@PathVariable("id") long id, Model model) {
+        model.addAttribute("rescue", rescueService.findRescueById(id));
+        return "viewrescue";
     }
 }
