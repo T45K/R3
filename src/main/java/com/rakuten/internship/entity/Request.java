@@ -25,6 +25,9 @@ public class Request {
     private String language;
 
     @Column(nullable = false)
+    private String description;
+
+    @Column(nullable = false)
     private float latitude;
 
     @Column(nullable = false)
