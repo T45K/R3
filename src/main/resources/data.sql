@@ -10,7 +10,7 @@ name,
 title
 )
 VALUES(
-'1',
+'1000',
 'desc',
 'img',
 '0',
