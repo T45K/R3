@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Real Time Rescue</title>
+</head>
+<body>
+<label>Title:</label><label th:text="${request.title}"></label><br>
+<label>Description:</label><label th:text="${request.description}"></label><br>
+<hr>
+todo チャットが入ります
+<hr>
+<form method="post">
+    <input type="text" name="message">
+    <input type="submit" value="Send">
+</form>
+
+</body>
+</html>
