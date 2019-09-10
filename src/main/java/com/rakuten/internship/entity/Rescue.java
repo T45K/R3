@@ -10,7 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Request {
+public class Rescue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
