@@ -20,15 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class TodoController {
-
-    private static final String[] ALL_LANGUAGES = {"ja", "en", "zh-CN", "zh-TW", "ko", "es", "ru", "fr", "de"};
-
     @Autowired
     private RequestService requestService;
 
     @GetMapping("/")
     public String home(Model model) {
-        //model.addAttribute("todos", requestService.findTodos());
         return "home";
     }
 
@@ -44,23 +40,9 @@ public class TodoController {
     }
 
     @GetMapping("/viewrequest/{id}")
-    public String viewrequest(@PathVariable("id") long id, Model model){
+    public String viewRequest(@PathVariable("id") long id, Model model){
         model.addAttribute("req",requestService.findRequestById(id));
         return "tmp";
     }
-
-    @GetMapping("/complete")
-    public String complete() {
-        return "complete";
-    }
-
-    /*
-    @PostMapping("/complete")
-    public String completeTodo(@ModelAttribute Todo todo) {
-        requestService.save(todo);
-        translateLanguages.setSourceLanguage(todo.getSourceLanguage());
-        translateLanguages.setTargetLanguage(todo.getTargetLanguage());
-        return "redirect:/";
-    }
-    */
+    
 }
