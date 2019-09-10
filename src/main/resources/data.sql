@@ -1,0 +1,22 @@
+INSERT INTO rescue(
+id,
+description,
+image,
+is_solved,
+language,
+latitude,
+longitude,
+name,
+title
+)
+VALUES(
+'1',
+'desc',
+'img',
+'0',
+'Ja',
+'12.34',
+'56.78',
+'name',
+'title'
+);
