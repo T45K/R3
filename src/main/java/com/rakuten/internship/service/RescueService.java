@@ -5,11 +5,14 @@ import com.rakuten.internship.repository.RescueRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class RescueService {
+    private static final int DISTANCE = 10;
     private final RescueRepository repository;
 
     public RescueService(final RescueRepository repository) {
@@ -26,5 +29,12 @@ public class RescueService {
 
     public void save(final Rescue rescue) {
         repository.save(rescue);
+    }
+
+    public List<Rescue> findAllRescuesFilteredByPoint(final double latitude, final double longitude) {
+        return repository.findAll().stream()
+                .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
+                .sorted(Comparator.comparing(a -> a.getDistance(latitude, longitude)))
+                .collect(Collectors.toList());
     }
 }
