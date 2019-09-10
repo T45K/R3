@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class RescueService {
+    private static final int DISTANCE = 10;
     private final RescueRepository repository;
 
     public RescueService(final RescueRepository repository) {
@@ -32,7 +33,7 @@ public class RescueService {
 
     public List<Rescue> findAllRescuesFilteredByPoint(final double latitude, final double longitude) {
         return repository.findAll().stream()
-                .filter(rescue -> rescue.getDistance(latitude, longitude) < 10)
+                .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
                 .sorted(Comparator.comparing(a -> a.getDistance(latitude, longitude)))
                 .collect(Collectors.toList());
     }
