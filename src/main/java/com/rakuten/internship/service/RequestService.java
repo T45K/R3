@@ -23,4 +23,8 @@ public class RequestService {
     public Request findRequestById(final long id) {
         return repository.findRequestById(id);
     }
+
+    public void save(final Request request) {
+        repository.save(request);
+    }
 }
