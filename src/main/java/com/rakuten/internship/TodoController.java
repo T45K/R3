@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,17 +41,19 @@ public class TodoController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("languages", ALL_LANGUAGES);
-        model.addAttribute("sourceLanguage", translateLanguages.getSourceLanguage());
-        model.addAttribute("targetLanguage", translateLanguages.getTargetLanguage());
         return "create";
     }
 
     @PostMapping("/create")
-    public String createTodo(@ModelAttribute Todo todo, RedirectAttributes attrs) throws JsonSyntaxException, ParseException, IOException, HttpException {
-        todo.setTranslatedText(todoService.translate2(todo));
-        attrs.addFlashAttribute("todo", todo);
-        return "redirect:/complete";
+    public String createTodo(@ModelAttribute Todo todo){
+        todoService.save(todo);
+        return "redirect:/viewrequest/"+todo.getId();
+    }
+
+    @GetMapping("/viewrequest/{id}")
+    public String viewrequest(@PathVariable("id") String id){
+        
+        return "";
     }
 
     @GetMapping("/complete")
