@@ -3,9 +3,9 @@ package com.rakuten.internship.service;
 import java.io.IOException;
 import java.util.List;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+/*import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.cloud.translate.Translate.TranslateOption;
-import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.TranslateOptions;*/
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -31,10 +31,10 @@ public class TodoService {
 
     @Autowired
     private TodoRepository todoRepository;
-
+/*
     @Autowired
     private GoogleCredential credential;
-    
+ */
     @Autowired
     private Gson gson;
 
@@ -47,11 +47,12 @@ public class TodoService {
     }
 
     public String translate(Todo todo) {
-        return TranslateOptions.getDefaultInstance().getService()
+  /*      return TranslateOptions.getDefaultInstance().getService()
             .translate(todo.getText(),
                 TranslateOption.sourceLanguage(todo.getSourceLanguage()),
                 TranslateOption.targetLanguage(todo.getTargetLanguage()))
-            .getTranslatedText();
+            .getTranslatedText();*/
+        return "ほんにゃら";
     }
 
     public String translate2(Todo todo) throws JsonSyntaxException, ParseException, IOException, HttpException {
@@ -68,7 +69,7 @@ public class TodoService {
     private HttpPost createQueryHttpPost(Todo todo) {
         return new HttpPost("https://translation.googleapis.com/language/translate/v2") {{
             addHeader("Content-Type", "application/json; charset=UTF-8");
-            addHeader("Authorization", "Bearer " + credential.getAccessToken());
+       //     addHeader("Authorization", "Bearer " + credential.getAccessToken());
             setEntity(new StringEntity(gson.toJson(createQueryJsonObject(todo)), "UTF-8"));
         }};
     }

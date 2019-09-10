@@ -58,11 +58,11 @@
 			<version>1.18.8</version>
 			<scope>provided</scope>
 		</dependency>
-        <!--<dependency>
+        <dependency>
           <groupId>com.google.cloud</groupId>
           <artifactId>google-cloud-translate</artifactId>
           <version>1.85.0</version>
-        </dependency>-->
+        </dependency>
 	</dependencies>
 
 	<build>
