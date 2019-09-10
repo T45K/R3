@@ -37,7 +37,7 @@ public class TodoController {
 
     @GetMapping("/viewrequest/{id}")
     public String viewRequest(@PathVariable("id") long id, Model model) {
-        model.addAttribute("req", requestService.findRequestById(id));
-        return "tmp";
+        model.addAttribute("request", requestService.findRequestById(id));
+        return "viewrequest";
     }
 }
