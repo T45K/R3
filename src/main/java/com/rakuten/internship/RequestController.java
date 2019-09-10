@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.PostMapping;
  * コントローラーとして使えるように、コードを記入してください。
  */
 @Controller
-public class TodoController {
+public class RequestController {
     @Autowired
     private RequestService requestService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
         return "home";
     }
 
     @GetMapping("/create")
-    public String create(Model model) {
+    public String create() {
         return "create";
     }
 
