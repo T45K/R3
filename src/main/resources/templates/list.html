@@ -24,8 +24,8 @@
             </thead>
             <tbody th:remove="all-but-first">
             <tr th:each="rescue: ${rescues}">
-                <td><a href="/viewrescue/id" th:text="${rescue.title}" th:href="@{/viewrescue/{rescue.id}}">テスト</a></td>
-                <td><a href="/viewrescue/id" th:text="${rescue.description}" th:href="@{/viewrescue/{rescue.id}}">あいうえおかきくけこさしすせそ</a>
+                <td><a href="/viewrescue/id" th:text="${rescue.title}" th:href="@{'/viewrescue/' + ${rescue.id}}">テスト</a></td>
+                <td><a href="/viewrescue/id" th:text="${rescue.description}" th:href="@{'/viewrescue/' + ${rescue.id}}">あいうえおかきくけこさしすせそ</a>
                 </td>
             </tr>
             <tr>
@@ -36,5 +36,16 @@
         </table>
     </div>
 </div>
+<script>
+$(function(){
+setTimeout(test,3000);
+
+function test() {
+    navigator.geolocation.getCurrentPosition(test2);
+}
+function test2(position) {
+    window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude;
+}});
+</script>
 </body>
 </html>
