@@ -44,7 +44,9 @@ public class Rescue {
 
     @PrePersist
     private void onPrePersist() {
-        this.timeStamp = new Date();
+        if (timeStamp == null) {
+            this.timeStamp = new Date();
+        }
     }
 
     /**
