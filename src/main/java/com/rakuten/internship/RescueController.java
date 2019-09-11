@@ -68,10 +68,10 @@ public class RescueController {
 
     @GetMapping("/viewrescue/{rescueId}/refresh")
     public String refresh(@PathVariable("rescueId") final long rescueId, final Model model) {
-        final List<ChatMessage> rescueIdList = chatMessageService.findAllByRescueId(rescueId);
-        model.addAttribute("rescueIdList", rescueIdList);
+        final List<ChatMessage> chatList = chatMessageService.findAllByRescueId(rescueId);
+        model.addAttribute("chatList", chatList);
 
-        return "viewrescueChat";
+        return "viewRescueChat";
     }
 }
 
