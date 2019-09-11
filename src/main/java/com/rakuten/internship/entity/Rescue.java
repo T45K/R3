@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.sql.Timestamp;
 
 @Entity
 @Data
@@ -32,6 +35,9 @@ public class Rescue {
 
     @Column(nullable = false)
     private float longitude;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp timeStamp;
 
     // TODO file upload
     private String image;
