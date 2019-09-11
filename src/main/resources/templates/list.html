@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -36,5 +36,25 @@
         </table>
     </div>
 </div>
+<script>
+$(function(){
+test();
+function test() {
+    navigator.geolocation.getCurrentPosition(test2);
+}
+
+function test2(position) {
+    $("#latitude").val(position.coords.latitude)
+    $("#longitude").val(position.coords.longitude);
+}
+
+setTimeout(function () {
+    location.reload();
+}, 5000);
+});
+
+
+
+</script>
 </body>
 </html>
