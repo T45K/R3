@@ -35,36 +35,36 @@
     </div>
 </div>
 <script th:inline="javascript">
-/*<![CDATA[*/
-$(function(){
-    var id = /*[[${rescue.id}]]*/ '1';
-    $("form").submit(function(event) {
-        event.preventDefault();
+    /*<![CDATA[*/
+    $(function () {
+        var id = /*[[${rescue.id}]]*/ '1';
+        $("form").submit(function (event) {
+            event.preventDefault();
 
-        $.ajax({
-          type: "POST",
-          url: "/viewrescue/" + id + "/sendMessage",
-          data: $("form").serialize()
-          }).done(function(msg){
-             refresh();
-          }).always(function(data) {
-             $("*[name=message]").val("");
-          });
+            $.ajax({
+                type: "POST",
+                url: "/viewrescue/" + id + "/sendMessage",
+                data: $("form").serialize()
+            }).done(function (msg) {
+                refresh();
+            }).always(function (data) {
+                $("*[name=message]").val("");
+            });
+        });
+
+        function refresh() {
+            $.ajax({
+                type: "GET",
+                url: "/viewrescue/" + id + "/refresh",
+                dataType: "html"
+            }).done(function (html) {
+                $("#chat").html(html);
+            });
+        }
+
+        setInterval(refresh, 500);
     });
-
-    function refresh(){
-    $.ajax({
-          type: "GET",
-          url: "/viewrescue/" + id + "/refresh",
-          dataType: "html"
-          }).done(function(html){
-             $("#chat").html(html);
-          });
-     }
-
-     setInterval(refresh,500);
-});
-/*]]>*/
+    /*]]>*/
 </script>
 </body>
 </html>
