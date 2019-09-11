@@ -19,7 +19,7 @@
         <button type="submit" class="btn btn-primary btn-lg btn-block">Send your location</button>
     </div>
     <hr>
-    <div class="row">
+    <div class="row" id="chat">
         todo チャットが入ります
     </div>
     <hr>
@@ -34,21 +34,38 @@
         </form>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
+/*<![CDATA[*/
 $(function(){
-$("form").submit(function(event) {
-event.preventDefault();
-$.ajax({
-  type: "POST",
-  url: "/viewrescue/1/sendMessage",
-  data: $("form").serialize()
-  }).done(function(msg){
-     alert( "Data Saved: " + msg );
-  }).always(function(data) {
-     $("*[name=message]").val("");
-  });
+    var id = /*[[${rescue.id}]]*/ '1';
+    $("form").submit(function(event) {
+        event.preventDefault();
+
+        $.ajax({
+          type: "POST",
+          url: "/viewrescue/" + id + "/sendMessage",
+          data: $("form").serialize()
+          }).done(function(msg){
+             refresh();
+          }).always(function(data) {
+             $("*[name=message]").val("");
+          });
+    });
+
+    function refresh(){
+    $.ajax({
+          type: "GET",
+          url: "/viewrescue/" + id + "/refresh",
+          dataType: "html"
+          }).done(function(html){
+             $("#chat").html(html);
+          });
+     }
+
+     setInterval(refresh,1000);
 });
-});
+/*]]>*/
+
 </script>
 </body>
 </html>
