@@ -50,15 +50,18 @@ public class Rescue {
      */
     public double getDistance(final double latitude, final double longitude) {
         final double radius = 6371;
-        final double latitudeDelta = this.latitude - latitude;
-        final double longitudeDelta = this.longitude - longitude;
+        final double latitudeDelta = Math.toRadians(this.latitude) - Math.toRadians(latitude);
+        final double longitudeDelta = Math.toRadians(this.longitude) - Math.toRadians(longitude);
+
+        final double latitudeRadian1 = Math.toRadians(latitude);
+        final double latitudeRadian2 = Math.toRadians(this.latitude);
 
         final double sinOfHalfOfLatitudeDelta = Math.sin(latitudeDelta / 2);
         final double sinOfHalfOfLongitudeDelta = Math.sin(longitudeDelta / 2);
 
-        final double a = Math.pow(sinOfHalfOfLatitudeDelta, 2) + Math.cos(latitude) * Math.cos(this.latitude) * Math.pow(sinOfHalfOfLongitudeDelta, 2);
-        final double b = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        final double a = Math.pow(sinOfHalfOfLatitudeDelta, 2) + Math.cos(latitudeRadian2) * Math.cos(latitudeRadian1) * Math.pow(sinOfHalfOfLongitudeDelta, 2);
+        final double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return radius * b;
+        return radius * c;
     }
 }
