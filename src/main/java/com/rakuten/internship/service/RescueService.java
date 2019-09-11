@@ -31,7 +31,7 @@ public class RescueService {
         repository.save(rescue);
     }
 
-    public List<Rescue> findAllRescuesFilteredByPoint(final double latitude, final double longitude) {
+    public List<Rescue> findRescuesFilteredByPointSortedByDistance(final double latitude, final double longitude) {
         return repository.findAll().stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
                 .sorted(Comparator.comparing(a -> a.getDistance(latitude, longitude)))
