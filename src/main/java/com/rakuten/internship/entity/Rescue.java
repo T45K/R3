@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import java.util.Date;
 
 @Entity
 @Data
@@ -33,10 +35,17 @@ public class Rescue {
     @Column(nullable = false)
     private float longitude;
 
+    private Date timeStamp;
+
     // TODO file upload
     private String image;
 
     private boolean isSolved;
+
+    @PrePersist
+    private void onPrePersist() {
+        this.timeStamp = new Date();
+    }
 
     /**
      * <p>
