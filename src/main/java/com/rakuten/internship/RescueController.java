@@ -43,12 +43,12 @@ public class RescueController {
         return "viewrescue";
     }
 
-    @GetMapping("/listpage/{latitude}/{longitude}")
+    @GetMapping("/list/{latitude}/{longitude}")
     public String viewList(@PathVariable("latitude") float latitude,
                            @PathVariable("longitude") float longitude,
                            Model model) {
         List<Rescue> rescues = rescueService.findRescuesFilteredByPointSortedByTimeStamp(latitude, longitude);
         model.addAttribute("rescues", rescues);
-        return "listpage";
+        return "list";
     }
 }
