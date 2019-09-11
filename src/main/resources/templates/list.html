@@ -15,7 +15,12 @@
 <body class="bg-light">
 <div class="container">
     <div class="row">
-        <table>
+        <h1>
+            Help List
+        </h1>
+    </div>
+    <div class="row">
+        <table class="table table-bordered table-striped table table-hover">
             <thead>
             <tr>
                 <th>title</th>
@@ -24,7 +29,8 @@
             </thead>
             <tbody th:remove="all-but-first">
             <tr th:each="rescue: ${rescues}">
-                <td><a href="/viewrescue/id" th:text="${rescue.title}" th:href="@{'/viewrescue/' + ${rescue.id}}">テスト</a></td>
+                <td><a href="/viewrescue/id" th:text="${rescue.title}"
+                       th:href="@{'/viewrescue/' + ${rescue.id}}">テスト</a></td>
                 <td><a href="/viewrescue/id" th:text="${rescue.description}" th:href="@{'/viewrescue/' + ${rescue.id}}">あいうえおかきくけこさしすせそ</a>
                 </td>
             </tr>
