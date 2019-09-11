@@ -39,6 +39,10 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
 $(function(){
+if(/*[[${newRescueFlag]]*/){
+    alert("新しいＨＥＬＰがあります！");
+}
+
 var latestId=/*[[${rescues.isEmpty() ? -1:rescues.get(0).id}]]*/ '1';
 
 setTimeout(getPosition,3000);
