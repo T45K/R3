@@ -41,12 +41,12 @@
 </div>
 <script>
 $(function(){
-test();
-function test() {
-    navigator.geolocation.getCurrentPosition(test2);
+getPosition();
+function getPosition() {
+    navigator.geolocation.getCurrentPosition(setValue);
 }
 
-function test2(position) {
+function setValue(position) {
     $("#latitude").val(position.coords.latitude)
     $("#longitude").val(position.coords.longitude);
 }});

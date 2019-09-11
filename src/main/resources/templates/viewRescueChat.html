@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>hoge</title>
+</head>
+<body>
+<div>
+    <ul>
+        <li th:each="list:${chatList}">
+            <span th:text="${list.name}">hoge</span>
+            <span th:text="${list.message}">fuga</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
