@@ -40,7 +40,7 @@ $("form").submit(function(event) {
 event.preventDefault();
 $.ajax({
   type: "POST",
-  url: "/viewrescue/1/sendmessage",
+  url: "/viewrescue/1/sendMessage",
   data: $("form").serialize()
   }).done(function(msg){
      alert( "Data Saved: " + msg );
