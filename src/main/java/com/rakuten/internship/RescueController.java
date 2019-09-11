@@ -4,6 +4,8 @@ import com.rakuten.internship.entity.ChatMessage;
 import com.rakuten.internship.entity.Rescue;
 import com.rakuten.internship.service.ChatMessageService;
 import com.rakuten.internship.service.RescueService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,11 +61,11 @@ public class RescueController {
     }
 
     @PostMapping("/viewrescue/{rescueId}/sendMessage")
-    public String sendMessage(@PathVariable("rescueId") final long rescueId, @ModelAttribute final ChatMessage chatMessage) {
+    public ResponseEntity sendMessage(@PathVariable("rescueId") final long rescueId, @ModelAttribute final ChatMessage chatMessage) {
         chatMessage.setRescueId(rescueId);
         chatMessageService.save(chatMessage);
 
-        return "";
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/viewrescue/{rescueId}/refresh")
