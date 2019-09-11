@@ -25,9 +25,9 @@
     <div class="row">
         <form method="post" action="/create" style="width:100%">
             <label>Title</label><br>
-            <input type="text" name="title" class="form-control"><br>
+            <input type="text" name="title" class="form-control" required><br>
             <label>Description</label><br>
-            <textarea name="description" class="form-control"></textarea><br>
+            <textarea name="description" class="form-control" required></textarea><br>
             <label>Language</label><br>
             <select name="language" class="custom-select d-block w-100">
                 <option value="jp">日本語</option>
@@ -50,6 +50,7 @@ function test2(position) {
     $("#latitude").val(position.coords.latitude)
     $("#longitude").val(position.coords.longitude);
 }});
+
 
 </script>
 </body>
