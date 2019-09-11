@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 /**
  * このクラスは、ウェブアプリケーションの挙動を制御するためのコントローラークラスです。。
  * コントローラーとして使えるように、コードを記入してください。
@@ -39,5 +41,14 @@ public class RescueController {
     public String viewRescue(@PathVariable("id") long id, Model model) {
         model.addAttribute("rescue", rescueService.findRescueById(id));
         return "viewrescue";
+    }
+
+    @GetMapping("/listpage/{latitude}/{longitude}")
+    public String viewList(@PathVariable("latitude") float latitude,
+                           @PathVariable("longitude") float longitude,
+                           Model model) {
+        List<Rescue> rescues = rescueService.findAllRescuesFilteredByPoint(latitude, longitude);
+        model.addAttribute("rescues", rescues);
+        return "listpage";
     }
 }
