@@ -36,16 +36,20 @@
         </table>
     </div>
 </div>
-<script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
 $(function(){
+var latestId=/*[[${rescues.isEmpty() ? -1:rescues.get(0).id}]]*/ '1';
+
 setTimeout(getPosition,3000);
 
 function getPosition() {
     navigator.geolocation.getCurrentPosition(updatePage);
 }
 function updatePage(position) {
-    window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude;
+    window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude + "?latestId=" + latestId;
 }});
+/*]]>*/
 </script>
 </body>
 </html>
