@@ -1,8 +1,11 @@
 package com.rakuten.internship;
 
+import com.rakuten.internship.entity.ChatMessage;
 import com.rakuten.internship.entity.Rescue;
+import com.rakuten.internship.service.ChatMessageService;
 import com.rakuten.internship.service.RescueService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +21,13 @@ import java.util.List;
  */
 @Controller
 public class RescueController {
-    @Autowired
-    private RescueService rescueService;
+    private final RescueService rescueService;
+    private final ChatMessageService chatMessageService;
+
+    public RescueController(final RescueService rescueService, final ChatMessageService chatMessageService) {
+        this.rescueService = rescueService;
+        this.chatMessageService = chatMessageService;
+    }
 
     @GetMapping("/")
     public String home() {
@@ -51,4 +59,21 @@ public class RescueController {
         model.addAttribute("rescues", rescues);
         return "list";
     }
+
+    @PostMapping("/viewrescue/{rescueId}/sendMessage")
+    public ResponseEntity sendMessage(@PathVariable("rescueId") final long rescueId, @ModelAttribute final ChatMessage chatMessage) {
+        chatMessage.setRescueId(rescueId);
+        chatMessageService.save(chatMessage);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/viewrescue/{rescueId}/refresh")
+    public String refresh(@PathVariable("rescueId") final long rescueId, final Model model) {
+        final List<ChatMessage> chatList = chatMessageService.findAllByRescueId(rescueId);
+        model.addAttribute("chatList", chatList);
+
+        return "viewRescueChat";
+    }
 }
+
