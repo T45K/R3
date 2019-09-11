@@ -43,6 +43,5 @@ public class RescueService {
         return repository.findAll(new Sort(Sort.Direction.ASC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
                 .collect(Collectors.toList());
-
     }
 }
