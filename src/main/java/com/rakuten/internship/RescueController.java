@@ -47,7 +47,7 @@ public class RescueController {
     public String viewList(@PathVariable("latitude") float latitude,
                            @PathVariable("longitude") float longitude,
                            Model model) {
-        List<Rescue> rescues = rescueService.findRescuesFilteredByPointSortedByDistance(latitude, longitude);
+        List<Rescue> rescues = rescueService.findRescuesFilteredByPointSortedByTimeStamp(latitude, longitude);
         model.addAttribute("rescues", rescues);
         return "listpage";
     }

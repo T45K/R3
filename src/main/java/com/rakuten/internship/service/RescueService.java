@@ -2,6 +2,7 @@ package com.rakuten.internship.service;
 
 import com.rakuten.internship.entity.Rescue;
 import com.rakuten.internship.repository.RescueRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,5 +37,12 @@ public class RescueService {
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
                 .sorted(Comparator.comparing(a -> a.getDistance(latitude, longitude)))
                 .collect(Collectors.toList());
+    }
+
+    public List<Rescue> findRescuesFilteredByPointSortedByTimeStamp(final double latitude, final double longitude) {
+        return repository.findAll(new Sort(Sort.Direction.ASC, "timeStamp")).stream()
+                .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
+                .collect(Collectors.toList());
+
     }
 }
