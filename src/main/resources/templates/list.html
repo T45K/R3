@@ -38,12 +38,12 @@
 </div>
 <script>
 $(function(){
-setTimeout(test,3000);
+setTimeout(getPosition,3000);
 
-function test() {
-    navigator.geolocation.getCurrentPosition(test2);
+function getPosition() {
+    navigator.geolocation.getCurrentPosition(updatePage);
 }
-function test2(position) {
+function updatePage(position) {
     window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude;
 }});
 </script>
