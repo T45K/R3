@@ -1,6 +1,8 @@
 package com.rakuten.internship;
 
+import com.rakuten.internship.entity.ChatMessage;
 import com.rakuten.internship.entity.Rescue;
+import com.rakuten.internship.service.ChatMessageService;
 import com.rakuten.internship.service.RescueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +20,13 @@ import java.util.List;
  */
 @Controller
 public class RescueController {
-    @Autowired
-    private RescueService rescueService;
+    private final RescueService rescueService;
+    private final ChatMessageService chatMessageService;
+
+    public RescueController(final RescueService rescueService, final ChatMessageService chatMessageService) {
+        this.rescueService = rescueService;
+        this.chatMessageService = chatMessageService;
+    }
 
     @GetMapping("/")
     public String home() {
@@ -51,4 +58,13 @@ public class RescueController {
         model.addAttribute("rescues", rescues);
         return "list";
     }
+
+    @PostMapping("/viewrescue/{id}/sendMessage")
+    public String sendMessage(@PathVariable("id") final long id, @ModelAttribute final ChatMessage chatMessage) {
+        chatMessage.setRescueId(id);
+        chatMessageService.save(chatMessage);
+
+        return "";
+    }
 }
+

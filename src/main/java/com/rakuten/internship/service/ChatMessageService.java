@@ -19,4 +19,8 @@ public class ChatMessageService {
     public List<ChatMessage> findAllByRescueId(final long rescueId) {
         return chatMessageRepository.findAllByRescueId(rescueId);
     }
+
+    public void save(final ChatMessage chatMessage) {
+        chatMessageRepository.save(chatMessage);
+    }
 }
