@@ -4,7 +4,6 @@ import com.rakuten.internship.entity.ChatMessage;
 import com.rakuten.internship.entity.Rescue;
 import com.rakuten.internship.service.ChatMessageService;
 import com.rakuten.internship.service.RescueService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,12 +58,20 @@ public class RescueController {
         return "list";
     }
 
-    @PostMapping("/viewrescue/{id}/sendMessage")
-    public String sendMessage(@PathVariable("id") final long id, @ModelAttribute final ChatMessage chatMessage) {
-        chatMessage.setRescueId(id);
+    @PostMapping("/viewrescue/{rescueId}/sendMessage")
+    public String sendMessage(@PathVariable("rescueId") final long rescueId, @ModelAttribute final ChatMessage chatMessage) {
+        chatMessage.setRescueId(rescueId);
         chatMessageService.save(chatMessage);
 
         return "";
+    }
+
+    @GetMapping("/viewrescue/{rescueId}/refresh")
+    public String refresh(@PathVariable("rescueId") final long rescueId, final Model model) {
+        final List<ChatMessage> rescueIdList = chatMessageService.findAllByRescueId(rescueId);
+        model.addAttribute("rescueIdList", rescueIdList);
+
+        return "viewrescueChat";
     }
 }
 
