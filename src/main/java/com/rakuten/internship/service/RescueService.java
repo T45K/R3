@@ -40,7 +40,7 @@ public class RescueService {
     }
 
     public List<Rescue> findRescuesFilteredByPointSortedByTimeStamp(final double latitude, final double longitude) {
-        return repository.findAll(new Sort(Sort.Direction.ASC, "timeStamp")).stream()
+        return repository.findAll(new Sort(Sort.Direction.DESC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
                 .collect(Collectors.toList());
     }
