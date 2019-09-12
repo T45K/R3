@@ -31,6 +31,12 @@ public class RescueService {
         repository.save(rescue);
     }
 
+    public List<Rescue> findFilteredRescue(final double latitude, final double longitude) {
+        return repository.findAll(new Sort(Sort.Direction.DESC, "timeStamp")).stream()
+                .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
+                .collect(Collectors.toList());
+    }
+
     public List<Rescue> findFilteredRescues(final double latitude, final double longitude, final List<String> langList) {
         return repository.findByLanguageIn(langList, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
