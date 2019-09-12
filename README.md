@@ -5,12 +5,20 @@
 
 ### For
 - Tourists who want help
-- Locals want to help tourists
+- Locals who want to help tourists
 
 ### Features
 - Real time chat
 - Real time notification
 - Navigation
+
+### Usage
+- Docker
+    - `./docker-run.sh`
+- Maven
+    - `JDK8+` & `Maven`
+    - `mvn clean install`
+    - `java -jar target/internship-0.0.1-SNAPSHOT.jar`
 
 <!-- # skeleton
 set file path of JSON file that contains your service account key to the environment variable GOOGLE_APPLICATION_CREDENTIALS.
