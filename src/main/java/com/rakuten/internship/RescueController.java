@@ -61,15 +61,16 @@ public class RescueController {
                            @PathVariable("longitude") float longitude,
                            @RequestParam(value = "latestId", required = false) Long id,
                            @RequestParam(value = "lang", required = false) List<String> langList,
+                           @RequestParam(value = "distance", required = false, defaultValue = "10") int distance,
                            Model model) {
         final List<Rescue> rescues;
         if (langList == null || langList.isEmpty()) {
             langList = Collections.emptyList();
-            rescues = rescueService.findFilteredRescue(latitude, longitude);
+            rescues = rescueService.findFilteredRescue(latitude, longitude, distance);
         } else {
-            rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
+            rescues = rescueService.findFilteredRescues(latitude, longitude, langList, distance);
         }
-
+        
         if (!rescues.isEmpty() && id != null && rescues.get(0).getId() != id) {
             model.addAttribute("newRescueFlag", true);
         }
