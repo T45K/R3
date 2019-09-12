@@ -66,12 +66,11 @@ public class RescueController {
         final List<Rescue> rescues;
         if (langList == null || langList.isEmpty()) {
             langList = Collections.emptyList();
-            rescues = rescueService.findFilteredRescue(latitude, longitude);
+            rescues = rescueService.findFilteredRescue(latitude, longitude, distance);
         } else {
-            rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
+            rescues = rescueService.findFilteredRescues(latitude, longitude, langList, distance);
         }
-
-        List<Rescue> rescues = rescueService.findFilteredRescues(latitude, longitude, langList, distance);
+        
         if (!rescues.isEmpty() && id != null && rescues.get(0).getId() != id) {
             model.addAttribute("newRescueFlag", true);
         }
