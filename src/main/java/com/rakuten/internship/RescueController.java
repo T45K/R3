@@ -8,12 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,9 +38,9 @@ public class RescueController {
     }
 
     @PostMapping("/create")
-    public String createTodo(@ModelAttribute Rescue rescue) {
+    public String createTodo(@ModelAttribute final Rescue rescue) {
         rescueService.save(rescue);
-        return "redirect:/viewrescue/" + rescue.getId();
+        return "redirect:/viewrescue/" + rescue.getId() + "/rescuee";
     }
 
     @GetMapping("/viewrescue/{id}/{userType}")
@@ -64,12 +61,22 @@ public class RescueController {
                            @PathVariable("longitude") float longitude,
                            @RequestParam(value = "latestId", required = false) Long id,
                            @RequestParam(value = "lang", required = false) List<String> langList,
+                           @RequestParam(value = "distance", required = false, defaultValue = "10") int distance,
                            Model model) {
-        List<Rescue> rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
+        final List<Rescue> rescues;
+        if (langList == null || langList.isEmpty()) {
+            langList = Collections.emptyList();
+            rescues = rescueService.findFilteredRescue(latitude, longitude, distance);
+        } else {
+            rescues = rescueService.findFilteredRescues(latitude, longitude, langList, distance);
+        }
+        
         if (!rescues.isEmpty() && id != null && rescues.get(0).getId() != id) {
             model.addAttribute("newRescueFlag", true);
         }
+
         model.addAttribute("rescues", rescues);
+        model.addAttribute("langList", langList);
         return "list";
     }
 

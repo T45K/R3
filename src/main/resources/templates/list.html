@@ -30,8 +30,9 @@
             <tbody th:remove="all-but-first">
             <tr th:each="rescue: ${rescues}">
                 <td><a href="/viewrescue/id" th:text="${rescue.title}"
-                       th:href="@{'/viewrescue/' + ${rescue.id}}">テスト</a></td>
-                <td><a href="/viewrescue/id" th:text="${rescue.description}" th:href="@{'/viewrescue/' + ${rescue.id}}">あいうえおかきくけこさしすせそ</a>
+                       th:href="@{'/viewrescue/' + ${rescue.id} + '/rescuer'}">テスト</a></td>
+                <td><a href="/viewrescue/id" th:text="${rescue.description}"
+                       th:href="@{'/viewrescue/' + ${rescue.id} + '/rescuer'}">あいうえおかきくけこさしすせそ</a>
                 </td>
             </tr>
             <tr>
@@ -44,22 +45,29 @@
 </div>
 <script th:inline="javascript">
     /*<![CDATA[*/
-$(function(){
-if(/*[[${newRescueFlag}]]*/){
-    alert("新しいＨＥＬＰがあります！");
-}
+    $(function () {
+        if (/*[[${newRescueFlag}]]*/) {
+            alert("新しいＨＥＬＰがあります！");
+        }
 
-var latestId=/*[[${rescues.isEmpty() ? -1:rescues.get(0).id}]]*/ '1';
+        var latestId =/*[[${rescues.isEmpty() ? -1:rescues.get(0).id}]]*/ '1';
 
-setTimeout(getPosition,3000);
+        setTimeout(getPosition, 3000);
 
-function getPosition() {
-    navigator.geolocation.getCurrentPosition(updatePage);
-}
-function updatePage(position) {
-    window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude + "?latestId=" + latestId;
-}});
-/*]]>*/
+        function getPosition() {
+            navigator.geolocation.getCurrentPosition(updatePage);
+        }
+
+        const langList =/*[[${langList}]]*/ null;
+        const langQuery = langList.map(lang => "lang=" + lang).join("&");
+
+        function updatePage(position) {
+            window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude + "?latestId=" + latestId + "&" + langQuery;
+        }
+    });
+    /*]]>*/
+
+
 </script>
 </body>
 </html>
