@@ -56,10 +56,16 @@ setTimeout(getPosition,3000);
 function getPosition() {
     navigator.geolocation.getCurrentPosition(updatePage);
 }
+
+const langList=/*[[${langList}]]*/ null;
+const langQuery=langList.map(lang=>"lang=" + lang).join("&");
+
 function updatePage(position) {
-    window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude + "?latestId=" + latestId;
+    window.location.href = "/list/" + position.coords.latitude + "/" + position.coords.longitude + "?latestId=" + latestId + "&" + langQuery;
 }});
 /*]]>*/
+
+
 </script>
 </body>
 </html>
