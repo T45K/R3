@@ -6,13 +6,25 @@
 </head>
 <body>
 <div class="container-fluid">
-    <ul>
-        <li th:each="chatMessage:${chatList}"
-            th:class="${chatMessage.isRescuer()} == ${rescuerFlag} ? 'mySelf' :'yourSelf' ">
-            <span th:text="${chatMessage.name}">hoge</span>
-            <span th:utext="${chatMessage.message}">fuga</span>
-        </li>
-    </ul>
+    <div th:each="chatMessage:${chatList}">
+        <div class="row" th:if="${chatMessage.isRescuer()} != ${rescuerFlag}">
+            <div class="mycomment">
+                <div>
+                    <span th:utext="${chatMessage.name} + '<br>' + ${chatMessage.message}">fuga</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" th:if="${chatMessage.isRescuer()} == ${rescuerFlag}">
+            <div class="balloon6">
+                <div class="chatting">
+                    <div class="says">
+                        <span th:utext="${chatMessage.name} + '<br>' + ${chatMessage.message}">fuga</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

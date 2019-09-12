@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/chat.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
@@ -27,14 +28,14 @@
             <p th:text="${rescue.description}"></p>
         </div>
         <div class="row" th:if="${userType}=='rescuee'">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Send your location</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="location">Send your location</button>
         </div>
         <div class="row" th:if="${userType}=='rescuer'">
             <button type="button" onclick="location.href='/list/0/0'" class="btn btn-secondary btn-lg btn-block">Give up</button>
         </div>
         <hr>
     </header>
-    <div class="row overflow-auto" id="chat" style="z-index:0;">
+    <div class="row" id="chat" style="z-index:0; overflow-y:auto; overflow-x:hidden;">
         <!-- チャットが入ります-->
     </div>
     <footer class="bg-light" style="margin-bottom:10px;">
