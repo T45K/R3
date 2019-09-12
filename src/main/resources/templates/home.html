@@ -27,7 +27,13 @@
         <!--    <a>Help</a>-->
     </div>
     <div class="row">
-        <a href="/list/0/0" class="btn btn-primary btn-lg btn-block" type="rescue" name="rescue">Rescue</a>
+        <form action="/list/0/0" method="get" style="width:100%;">
+            <p>
+                <input type="checkbox" name="lang" value="jp" checked="checked">日本語
+                <input type="checkbox" name="lang" value="en">English
+            </p>
+            <button class="btn btn-primary btn-lg btn-block" name="rescue">Rescue</button>
+        </form>
         <!--    <a>Rescue</a>-->
     </div>
 </div>

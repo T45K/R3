@@ -31,13 +31,13 @@ public class RescueService {
     }
 
     public List<Rescue> findFilteredRescue(final double latitude, final double longitude, final int distance) {
-        return repository.findAll(new Sort(Sort.Direction.DESC, "timeStamp")).stream()
+        return repository.findByIsSolved(false, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < distance)
                 .collect(Collectors.toList());
     }
 
     public List<Rescue> findFilteredRescues(final double latitude, final double longitude, final List<String> langList, final int distance) {
-        return repository.findByLanguageIn(langList, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
+        return repository.findByLanguageInAndIsSolved(langList, false, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < distance)
                 .collect(Collectors.toList());
     }
