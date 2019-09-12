@@ -70,7 +70,7 @@ public class RescueController {
         } else {
             rescues = rescueService.findFilteredRescues(latitude, longitude, langList, distance);
         }
-        
+
         if (!rescues.isEmpty() && id != null && rescues.get(0).getId() != id) {
             model.addAttribute("newRescueFlag", true);
         }
@@ -111,6 +111,15 @@ public class RescueController {
         model.addAttribute("rescuerFlag", "rescuer".equals(userType));
 
         return "viewRescueChat";
+    }
+
+    @PostMapping("/success/{rescueId}")
+    public ResponseEntity solve(@PathVariable("rescueId") final long rescueId) {
+        final Rescue rescue = rescueService.findRescueById(rescueId);
+        rescue.setSolved(true);
+        rescueService.save(rescue);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }
 
