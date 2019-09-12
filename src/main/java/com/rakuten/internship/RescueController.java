@@ -64,6 +64,7 @@ public class RescueController {
                            Model model) {
         final List<Rescue> rescues;
         if (langList == null || langList.isEmpty()) {
+            langList = Collections.emptyList();
             rescues = rescueService.findFilteredRescue(latitude, longitude);
         } else {
             rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
