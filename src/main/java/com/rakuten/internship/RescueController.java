@@ -42,9 +42,16 @@ public class RescueController {
         return "redirect:/viewrescue/" + rescue.getId();
     }
 
-    @GetMapping("/viewrescue/{id}")
-    public String viewRescue(@PathVariable("id") long id, Model model) {
+    @GetMapping("/viewrescue/{id}/{userType}")
+    public String viewRescue(@PathVariable("id") long id,
+                             @PathVariable("userType") final String userType,
+                             final Model model) {
+        if (!("rescuer".equals(userType) || "rescuee".equals(userType))) {
+            return "error";
+        }
+
         model.addAttribute("rescue", rescueService.findRescueById(id));
+        model.addAttribute("userType", userType);
         return "viewrescue";
     }
 
@@ -61,14 +68,14 @@ public class RescueController {
         return "list";
     }
 
-    @PostMapping("/viewrescue/{rescueId}/{userType}/sendMessage")
+    @PostMapping("/viewrescue/{rescueId}/sendMessage/{userType}")
     public ResponseEntity sendMessage(@PathVariable("rescueId") final long rescueId,
                                       @PathVariable("userType") final String userType,
                                       @ModelAttribute final ChatMessage chatMessage) {
         if ("rescuee".equals(userType)) {
-            chatMessage.setRescuee(true);
+            chatMessage.setRescuer(true);
         } else if ("rescuer".equals(userType)) {
-            chatMessage.setRescuee(false);
+            chatMessage.setRescuer(false);
         } else {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
@@ -79,10 +86,17 @@ public class RescueController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/viewrescue/{rescueId}/refresh")
-    public String refresh(@PathVariable("rescueId") final long rescueId, final Model model) {
+    @GetMapping("/viewrescue/{rescueId}/refresh/{userType}")
+    public String refresh(@PathVariable("rescueId") final long rescueId,
+                          @PathVariable("userType") final String userType,
+                          final Model model) {
+        if (!("rescuer".equals(userType) || "rescuee".equals(userType))) {
+            return "error";
+        }
+
         final List<ChatMessage> chatList = chatMessageService.findAllByRescueId(rescueId);
         model.addAttribute("chatList", chatList);
+        model.addAttribute("rescuerFlag", "rescuer".equals(userType));
 
         return "viewRescueChat";
     }
