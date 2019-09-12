@@ -5,7 +5,7 @@
 
 ### For
 - Tourists who want help
-- Locals want to help tourists
+- Locals who want to help tourists
 
 ### Features
 - Real time chat
