@@ -25,17 +25,20 @@
         <p th:text="${rescue.description}"></p>
     </div>
     <div class="row">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Send your location</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="location">Send your location</button>
+    </div>
+    <div class="row">
+        <button type="button" onclick="history.back()" class="btn btn-secondary btn-lg btn-block">Give up</button>
     </div>
     <hr>
     <div class="row" id="chat">
-        todo チャットが入ります
+        <!-- チャットが入ります-->
     </div>
     <hr>
     <div class="row">
         <form method="post" style="width:100%">
             <div class="input-group">
-                <input type="text" name="name" class="form-control" placeholder="名無しさん">
+                <input type="text" name="name" class="form-control" placeholder="名無しさん" value="名無しさん">
                 <input type="text" name="message" class="form-control" placeholder="message">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-secondary">Send</button>
@@ -49,6 +52,15 @@
     $(function () {
         const id = /*[[${rescue.id}]]*/ '1';
         const userType = /*[[${userType}]]*/ "rescuee";
+
+        $("#location").click(function (event) {
+            navigator.geolocation.getCurrentPosition(setValue);
+        });
+
+        function setValue(position) {
+            $("*[name=message]").val("<a href='https://www.google.com/maps/search/?api=1&query=" + position.coords.latitude + "," + position.coords.longitude + "' target='_blank'>Come here</a>");
+            $("form").submit();
+        }
         $("form").submit(function (event) {
             event.preventDefault();
 

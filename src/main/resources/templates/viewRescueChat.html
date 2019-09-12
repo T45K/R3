@@ -10,7 +10,7 @@
         <li th:each="chatMessage:${chatList}"
             th:class="${chatMessage.isRescuer()} == ${rescuerFlag} ? 'mySelf' :'yourSelf' ">
             <span th:text="${chatMessage.name}">hoge</span>
-            <span th:text="${chatMessage.message}">fuga</span>
+            <span th:utext="${chatMessage.message}">fuga</span>
         </li>
     </ul>
 </div>
