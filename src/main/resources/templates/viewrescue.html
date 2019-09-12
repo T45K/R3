@@ -94,7 +94,7 @@
                 dataType: "html"
             }).done(function (html) {
                 var flg=0;
-                if(document.getElementById('chat').clientHeight + $("#chat").scrollTop() == $("#chat").get(0).scrollHeight)flg=1
+                if(document.getElementById('chat').clientHeight + $("#chat").scrollTop() == $("#chat").get(0).scrollHeight)flg=1;
                 $("#chat").html(html);
                 if(flg==1){
                     $("#chat").scrollTop($("#chat").get(0).scrollHeight);
