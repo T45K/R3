@@ -62,13 +62,17 @@ public class RescueController {
                            @RequestParam(value = "latestId", required = false) Long id,
                            @RequestParam(value = "lang", required = false) List<String> langList,
                            Model model) {
-        if (langList == null) {
-            langList = Collections.emptyList();
+        final List<Rescue> rescues;
+        if (langList == null || langList.isEmpty()) {
+            rescues = rescueService.findFilteredRescue(latitude, longitude);
+        } else {
+            rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
         }
-        List<Rescue> rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
+
         if (!rescues.isEmpty() && id != null && rescues.get(0).getId() != id) {
             model.addAttribute("newRescueFlag", true);
         }
+
         model.addAttribute("rescues", rescues);
         model.addAttribute("langList", langList);
         return "list";
