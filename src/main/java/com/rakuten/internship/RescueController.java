@@ -38,9 +38,9 @@ public class RescueController {
     }
 
     @PostMapping("/create")
-    public String createTodo(@ModelAttribute Rescue rescue) {
+    public String createTodo(@ModelAttribute final Rescue rescue) {
         rescueService.save(rescue);
-        return "redirect:/viewrescue/" + rescue.getId();
+        return "redirect:/viewrescue/" + rescue.getId() + "/rescuee";
     }
 
     @GetMapping("/viewrescue/{id}/{userType}")
