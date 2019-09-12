@@ -6,7 +6,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,15 +31,8 @@ public class RescueService {
         repository.save(rescue);
     }
 
-    public List<Rescue> findRescuesFilteredByPointSortedByDistance(final double latitude, final double longitude) {
-        return repository.findAll().stream()
-                .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
-                .sorted(Comparator.comparing(a -> a.getDistance(latitude, longitude)))
-                .collect(Collectors.toList());
-    }
-
-    public List<Rescue> findRescuesFilteredByPointSortedByTimeStamp(final double latitude, final double longitude) {
-        return repository.findAll(new Sort(Sort.Direction.DESC, "timeStamp")).stream()
+    public List<Rescue> findFilteredRescues(final double latitude, final double longitude, final List<String> langList) {
+        return repository.findByLanguageIn(langList, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
                 .collect(Collectors.toList());
     }
