@@ -7,16 +7,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Real Time Rescue</title>
-    <style type="text/css">
-        .mySelf {
-            text-align: left;
-        }
-
-        .yourSelf {
-            text-align: right;
-        }
-
-    </style>
 </head>
 <body class="bg-light">
 <div class="container">
@@ -28,10 +18,13 @@
             <p th:text="${rescue.description}"></p>
         </div>
         <div class="row" th:if="${userType}=='rescuee'">
+            <button type="submit" class="btn btn-success btn-lg btn-block" id="solved">Solved</button>
             <button type="submit" class="btn btn-primary btn-lg btn-block" id="location">Send your location</button>
         </div>
         <div class="row" th:if="${userType}=='rescuer'">
-            <button type="button" onclick="location.href='/list/0/0'" class="btn btn-secondary btn-lg btn-block">Give up</button>
+            <button type="button" onclick="location.href='/list/0/0'" class="btn btn-secondary btn-lg btn-block">Give
+                up
+            </button>
         </div>
         <hr>
     </header>
@@ -73,6 +66,22 @@
             $("form").submit();
         }
 
+         $("#solved").click(function (event) {
+             event.preventDefault();
+
+             if(!confirm('Really solved?')){
+                  return false;
+             }
+
+             $.ajax({
+                    type: "POST",
+                    url: "/success/" + id
+                }).done(function (msg) {
+                    $("*[name=message]").val("Problem solved. Thank you!!! &lt;&lt;&lt;You got 10 toku points!!!&gt;&gt;&gt;");
+                    $("form").submit();
+                });
+        });
+
         $("form").submit(function (event) {
             event.preventDefault();
 
@@ -105,6 +114,7 @@
         setInterval(refresh, 500);
     });
     /*]]>*/
+
 
 </script>
 </body>

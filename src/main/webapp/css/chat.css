@@ -24,7 +24,7 @@
   position: relative;
   margin: 0 0 0 50px;
   padding: 10px;
-  max-width: 250px;
+  max-width: 500px;
   border-radius: 12px;
   background: #edf1ee;
 }
@@ -47,7 +47,7 @@
 
 .mycomment {
   margin: 20px 50px 20px auto;
-  max-width: 250px;
+  max-width: 500px;
 }
 .mycomment div {
   position: relative;
