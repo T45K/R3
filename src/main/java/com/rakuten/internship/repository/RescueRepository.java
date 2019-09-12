@@ -9,5 +9,5 @@ import java.util.List;
 public interface RescueRepository extends JpaRepository<Rescue, Long> {
     Rescue findRescueById(final long id);
 
-    List<Rescue> findByLanguageIn(final List<String> langList, final Sort sort);
+    List<Rescue> findByLanguageInAndSolved(final List<String> langList, final boolean isSolved, final Sort sort);
 }

@@ -37,7 +37,7 @@ public class RescueService {
     }
 
     public List<Rescue> findFilteredRescues(final double latitude, final double longitude, final List<String> langList, final int distance) {
-        return repository.findByLanguageIn(langList, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
+        return repository.findByLanguageInAndSolved(langList, false, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
                 .filter(rescue -> rescue.getDistance(latitude, longitude) < distance)
                 .collect(Collectors.toList());
     }
