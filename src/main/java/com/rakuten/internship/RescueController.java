@@ -61,8 +61,18 @@ public class RescueController {
         return "list";
     }
 
-    @PostMapping("/viewrescue/{rescueId}/sendMessage")
-    public ResponseEntity sendMessage(@PathVariable("rescueId") final long rescueId, @ModelAttribute final ChatMessage chatMessage) {
+    @PostMapping("/viewrescue/{rescueId}/{userType}/sendMessage")
+    public ResponseEntity sendMessage(@PathVariable("rescueId") final long rescueId,
+                                      @PathVariable("userType") final String userType,
+                                      @ModelAttribute final ChatMessage chatMessage) {
+        if ("rescuee".equals(userType)) {
+            chatMessage.setRescuee(true);
+        } else if ("rescuer".equals(userType)) {
+            chatMessage.setRescuee(false);
+        } else {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+
         chatMessage.setRescueId(rescueId);
         chatMessageService.save(chatMessage);
 
