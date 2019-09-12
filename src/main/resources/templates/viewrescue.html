@@ -9,35 +9,43 @@
 </head>
 <body class="bg-light">
 <div class="container">
-    <div class="row">
-        <h4 th:text="${rescue.title}"></h4>
-    </div>
-    <div class="row">
-        <p th:text="${rescue.description}"></p>
-    </div>
-    <div class="row">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Send your location</button>
-    </div>
-    <hr>
-    <div class="row" id="chat">
+    <header class="bg-light" style="z-index:1;">
+        <div class="row">
+            <h4 th:text="${rescue.title}"></h4>
+        </div>
+        <div class="row">
+            <p th:text="${rescue.description}"></p>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Send your location</button>
+        </div>
+        <hr>
+    </header>
+    <div class="row overflow-auto" id="chat" style="z-index:0;">
         todo チャットが入ります
     </div>
-    <hr>
-    <div class="row">
-        <form method="post" style="width:100%">
-            <div class="input-group">
-                <input type="text" name="name" class="form-control" placeholder="名無しさん">
-                <input type="text" name="message" class="form-control" placeholder="message">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-secondary">Send</button>
+    <footer class="bg-light" style="margin-bottom:10px;">
+        <hr>
+        <div class="row">
+            <form method="post" style="width:100%">
+                <div class="input-group">
+                    <input type="text" name="name" class="form-control" placeholder="名無しさん">
+                    <input type="text" name="message" class="form-control" placeholder="message">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-secondary">Send</button>
+                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
+    </footer>
 </div>
 <script th:inline="javascript">
     /*<![CDATA[*/
     $(function () {
+        var sH;
+        sH = window.innerHeight - $("footer").outerHeight(true) - $("header").outerHeight(true) - 33;
+        $("#chat").css('height', sH);
+
         var id = /*[[${rescue.id}]]*/ '1';
         $("form").submit(function (event) {
             event.preventDefault();
@@ -66,6 +74,8 @@
         setInterval(refresh, 500);
     });
     /*]]>*/
+
+
 </script>
 </body>
 </html>
