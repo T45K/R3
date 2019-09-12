@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class RescueService {
-    private static final int DISTANCE = 10;
     private final RescueRepository repository;
 
     public RescueService(final RescueRepository repository) {
@@ -31,9 +30,9 @@ public class RescueService {
         repository.save(rescue);
     }
 
-    public List<Rescue> findFilteredRescues(final double latitude, final double longitude, final List<String> langList) {
+    public List<Rescue> findFilteredRescues(final double latitude, final double longitude, final List<String> langList,final int distance) {
         return repository.findByLanguageIn(langList, new Sort(Sort.Direction.DESC, "timeStamp")).stream()
-                .filter(rescue -> rescue.getDistance(latitude, longitude) < DISTANCE)
+                .filter(rescue -> rescue.getDistance(latitude, longitude) < distance)
                 .collect(Collectors.toList());
     }
 }
