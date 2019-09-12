@@ -6,6 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Real Time Rescue</title>
+    <style type="text/css">
+        .mySelf {
+            text-align: left;
+        }
+
+        .yourSelf {
+            text-align: right;
+        }
+    </style>
 </head>
 <body class="bg-light">
 <div class="container">
@@ -19,17 +28,20 @@
         <div class="row">
             <button type="submit" class="btn btn-primary btn-lg btn-block">Send your location</button>
         </div>
+        <div class="row">
+            <button type="button" onclick="history.back()" class="btn btn-secondary btn-lg btn-block">Give up</button>
+        </div>
         <hr>
     </header>
     <div class="row overflow-auto" id="chat" style="z-index:0;">
-        todo チャットが入ります
+        <!-- チャットが入ります-->
     </div>
     <footer class="bg-light" style="margin-bottom:10px;">
         <hr>
         <div class="row">
             <form method="post" style="width:100%">
                 <div class="input-group">
-                    <input type="text" name="name" class="form-control" placeholder="名無しさん">
+                    <input type="text" name="name" class="form-control" placeholder="名無しさん" value="名無しさん">
                     <input type="text" name="message" class="form-control" placeholder="message">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary">Send</button>
@@ -46,13 +58,24 @@
         sH = window.innerHeight - $("footer").outerHeight(true) - $("header").outerHeight(true) - 33;
         $("#chat").css('height', sH);
 
-        var id = /*[[${rescue.id}]]*/ '1';
+        const id = /*[[${rescue.id}]]*/ '1';
+        const userType = /*[[${userType}]]*/ "rescuee";
+
+        $("#location").click(function (event) {
+            navigator.geolocation.getCurrentPosition(setValue);
+        });
+
+        function setValue(position) {
+            $("*[name=message]").val("<a href='https://www.google.com/maps/search/?api=1&query=" + position.coords.latitude + "," + position.coords.longitude + "' target='_blank'>Come here</a>");
+            $("form").submit();
+        }
+
         $("form").submit(function (event) {
             event.preventDefault();
 
             $.ajax({
                 type: "POST",
-                url: "/viewrescue/" + id + "/sendMessage",
+                url: "/viewrescue/" + id + "/sendMessage/" + userType,
                 data: $("form").serialize()
             }).done(function (msg) {
                 refresh();
@@ -64,7 +87,7 @@
         function refresh() {
             $.ajax({
                 type: "GET",
-                url: "/viewrescue/" + id + "/refresh",
+                url: "/viewrescue/" + id + "/refresh/" + userType,
                 dataType: "html"
             }).done(function (html) {
                 $("#chat").html(html);
@@ -74,8 +97,6 @@
         setInterval(refresh, 500);
     });
     /*]]>*/
-
-
 </script>
 </body>
 </html>
