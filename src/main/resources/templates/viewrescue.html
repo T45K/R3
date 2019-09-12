@@ -6,6 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Real Time Rescue</title>
+    <style type="text/css">
+        .mySelf {
+            text-align: left;
+        }
+
+        .yourSelf {
+            text-align: right;
+        }
+    </style>
 </head>
 <body class="bg-light">
 <div class="container">
@@ -41,7 +50,8 @@
 <script th:inline="javascript">
     /*<![CDATA[*/
     $(function () {
-        var id = /*[[${rescue.id}]]*/ '1';
+        const id = /*[[${rescue.id}]]*/ '1';
+        const userType = /*[[${userType}]]*/ "rescuee";
 
         $("#location").click(function (event) {
             navigator.geolocation.getCurrentPosition(setValue);
@@ -51,13 +61,12 @@
             $("*[name=message]").val("<a href='https://www.google.com/maps/search/?api=1&query=" + position.coords.latitude + "," + position.coords.longitude + "' target='_blank'>Come here</a>");
             $("form").submit();
         }
-
         $("form").submit(function (event) {
             event.preventDefault();
 
             $.ajax({
                 type: "POST",
-                url: "/viewrescue/" + id + "/sendMessage",
+                url: "/viewrescue/" + id + "/sendMessage/" + userType,
                 data: $("form").serialize()
             }).done(function (msg) {
                 refresh();
@@ -69,7 +78,7 @@
         function refresh() {
             $.ajax({
                 type: "GET",
-                url: "/viewrescue/" + id + "/refresh",
+                url: "/viewrescue/" + id + "/refresh/" + userType,
                 dataType: "html"
             }).done(function (html) {
                 $("#chat").html(html);

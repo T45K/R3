@@ -23,7 +23,7 @@ public class ChatMessage {
 
     private String message;
 
-    private boolean isHelper;
+    private boolean isRescuer;
 
     private Date timeStamp;
 
