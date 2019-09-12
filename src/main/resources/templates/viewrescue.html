@@ -14,6 +14,7 @@
         .yourSelf {
             text-align: right;
         }
+
     </style>
 </head>
 <body class="bg-light">
@@ -41,7 +42,8 @@
         <div class="row">
             <form method="post" style="width:100%">
                 <div class="input-group">
-                    <input type="text" name="name" class="form-control" placeholder="名無しさん" value="名無しさん" th:value="${userType}=='rescuer'?'心優しい名無しさん':'困ったさん'">
+                    <input type="text" name="name" class="form-control" placeholder="名無しさん" value="名無しさん"
+                           th:value="${userType}=='rescuer'?'心優しい名無しさん':'困ったさん'">
                     <input type="text" name="message" class="form-control" placeholder="message">
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary">Send</button>
@@ -90,13 +92,19 @@
                 url: "/viewrescue/" + id + "/refresh/" + userType,
                 dataType: "html"
             }).done(function (html) {
+                var flg=0;
+                if(document.getElementById('chat').clientHeight + $("#chat").scrollTop() == $("#chat").get(0).scrollHeight)flg=1
                 $("#chat").html(html);
+                if(flg==1){
+                    $("#chat").scrollTop($("#chat").get(0).scrollHeight);
+                }
             });
         }
 
         setInterval(refresh, 500);
     });
     /*]]>*/
+
 </script>
 </body>
 </html>
