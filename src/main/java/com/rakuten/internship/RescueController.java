@@ -38,9 +38,9 @@ public class RescueController {
     }
 
     @PostMapping("/create")
-    public String createTodo(@ModelAttribute Rescue rescue) {
+    public String createTodo(@ModelAttribute final Rescue rescue) {
         rescueService.save(rescue);
-        return "redirect:/viewrescue/" + rescue.getId();
+        return "redirect:/viewrescue/" + rescue.getId() + "/rescuee";
     }
 
     @GetMapping("/viewrescue/{id}/{userType}")
@@ -63,14 +63,19 @@ public class RescueController {
                            @RequestParam(value = "lang", required = false) List<String> langList,
                            @RequestParam(value = "distance", required = false, defaultValue = "10") int distance,
                            Model model) {
-        if (langList == null) {
+        final List<Rescue> rescues;
+        if (langList == null || langList.isEmpty()) {
             langList = Collections.emptyList();
+            rescues = rescueService.findFilteredRescue(latitude, longitude);
+        } else {
+            rescues = rescueService.findFilteredRescues(latitude, longitude, langList);
         }
 
         List<Rescue> rescues = rescueService.findFilteredRescues(latitude, longitude, langList, distance);
         if (!rescues.isEmpty() && id != null && rescues.get(0).getId() != id) {
             model.addAttribute("newRescueFlag", true);
         }
+
         model.addAttribute("rescues", rescues);
         model.addAttribute("langList", langList);
         return "list";

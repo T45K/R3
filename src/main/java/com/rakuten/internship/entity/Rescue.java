@@ -30,10 +30,10 @@ public class Rescue {
     private String description;
 
     @Column(nullable = false)
-    private float latitude;
+    private float latitude = 0;
 
     @Column(nullable = false)
-    private float longitude;
+    private float longitude = 0;
 
     private Date timeStamp;
 
