@@ -22,7 +22,7 @@
             <button type="submit" class="btn btn-primary btn-lg btn-block" id="location">Send your location</button>
         </div>
         <div class="row" th:if="${userType}=='rescuer'">
-            <button type="button" onclick="location.href='/list/0/0'" class="btn btn-secondary btn-lg btn-block">Give
+            <button type="button" class="btn btn-secondary btn-lg btn-block" id="giveup">Give
                 up
             </button>
         </div>
@@ -61,6 +61,23 @@
         const id = /*[[${rescue.id}]]*/ '1';
         const userType = /*[[${userType}]]*/ "rescuee";
 
+        if(userType == "rescuer"){
+            $("*[name=message]").val("I will help you!!");
+            sendMessage();
+        }
+
+        $("#giveup").click(function (event) {
+            event.preventDefault();
+
+            if(!confirm('Really???')){
+                  return false;
+             }
+
+            $("*[name=message]").val("Sorry, I can't help you..... Bye.");
+            $("form").submit();
+            location.href='/list/0/0';
+        });
+
         $("#location").click(function (event) {
             navigator.geolocation.getCurrentPosition(setValue);
         });
@@ -88,7 +105,10 @@
 
         $("form").submit(function (event) {
             event.preventDefault();
+            sendMessage();
+        });
 
+        function sendMessage() {
             $.ajax({
                 type: "POST",
                 url: "/viewrescue/" + id + "/sendMessage/" + userType,
@@ -98,7 +118,7 @@
             }).always(function (data) {
                 $("*[name=message]").val("");
             });
-        });
+        }
 
         function refresh() {
             $.ajax({
