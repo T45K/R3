@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/T45K/R3.svg?style=svg)](https://circleci.com/gh/T45K/R3)
-[![codecov](https://codecov.io/gh/takuoki/clmconv/branch/master/graph/badge.svg)](https://codecov.io/gh/takuoki/clmconv)
+[![codecov](https://codecov.io/gh/T45K/R3/branch/master/graph/badge.svg)](https://codecov.io/gh/T45K/R3)
 
 # R3
 ## Rakuten Real time Rescue
