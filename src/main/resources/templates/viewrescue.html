@@ -140,8 +140,12 @@
         setInterval(refresh, 500);
 
         $("#stamp").change(function (event) {
-            $("*[name=message]").val("<img src='/img/stamp/" + $(this).val() +".png' width='400' height='400'>");
+            if($(this).val() == ""){
+                return false;
+            }
+            $("*[name=message]").val("<img src='/img/stamp/" + $(this).val() +".png' width='200' height='200'>");
             sendMessage();
+            $(this).val("");
         });
 
     });
