@@ -39,9 +39,10 @@
                     <input type="text" name="name" class="form-control" placeholder="名無しさん" value="名無しさん"
                            th:value="${userType}=='rescuer'?'心優しい名無しさん':'困ったさん'">
                     <input type="text" name="message" class="form-control" placeholder="message">
-                    <select name="stamp">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                    <select id="stamp">
+                        <option value="">stamp</option>
+                        <option value="ok">OK!</option>
+                        <option value="help">HELP!</option>
                     </select>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary">Send</button>
@@ -137,8 +138,15 @@
 
 
         setInterval(refresh, 500);
+
+        $("#stamp").change(function (event) {
+            $("*[name=message]").val("<img src='/img/stamp/" + $(this).val() +".png' width='400' height='400'>");
+            sendMessage();
+        });
+
     });
     /*]]>*/
+
 
 
 </script>
