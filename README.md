@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/T45K/R3.svg?style=svg)](https://circleci.com/gh/T45K/R3)
+[![codecov](https://codecov.io/gh/takuoki/clmconv/branch/master/graph/badge.svg)](https://codecov.io/gh/takuoki/clmconv)
 
 # R3
 ## Rakuten Real time Rescue
@@ -16,7 +17,7 @@
 - Docker
     - `./docker-run.sh`
 - Maven
-    - `JDK8+` & `Maven`
+    - JDK8+ and Maven are required.
     - `mvn clean install`
     - `java -jar target/internship-0.0.1-SNAPSHOT.jar`
 
