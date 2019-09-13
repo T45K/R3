@@ -3,6 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
 version: 2
+
+orbs:
+  codecov: codecov/codecov@1.0.5
+
 jobs:
   build:
     docker:
@@ -39,3 +43,9 @@ jobs:
 
       # run tests!
       - run: mvn integration-test
+
+      - run: mvn jacoco:prepare-agent test jacoco:report
+      - run: mkdir -p $CIRCLE_TEST_REPORTS/junit
+      - run: find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+      - run: cp -r ./target/site/* $CIRCLE_TEST_REPORTS/
+      - run: bash <(curl -s https://codecov.io/bash)
