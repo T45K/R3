@@ -39,6 +39,11 @@
                     <input type="text" name="name" class="form-control" placeholder="名無しさん" value="名無しさん"
                            th:value="${userType}=='rescuer'?'心優しい名無しさん':'困ったさん'">
                     <input type="text" name="message" class="form-control" placeholder="message">
+                    <select id="stamp">
+                        <option value="">stamp</option>
+                        <option value="okok">OK!</option>
+                        <option value="helphelp">HELP!</option>
+                    </select>
                     <div class="input-group-append">
                         <button type="submit" class="btn btn-secondary">Send</button>
                     </div>
@@ -124,16 +129,30 @@
             }).done(function (html) {
                 var flg=0;
                 if( Math.abs(document.getElementById('chat').clientHeight + $("#chat").scrollTop() - $("#chat").get(0).scrollHeight) < 3 )flg=1;
-                $("#chat").html(html);
+                if($("#chat div.row").length != $(html).find("div.row").length){
+                    $("#chat").html(html);
+                }
                 if(flg==1){
                     $("#chat").scrollTop($("#chat").get(0).scrollHeight);
                 }
             });
         }
 
+
         setInterval(refresh, 500);
+
+        $("#stamp").change(function (event) {
+            if($(this).val() == ""){
+                return false;
+            }
+            $("*[name=message]").val("<img src='/img/stamp/" + $(this).val() +".png' width='200' height='200'>");
+            sendMessage();
+            $(this).val("");
+        });
+
     });
     /*]]>*/
+
 
 
 </script>
