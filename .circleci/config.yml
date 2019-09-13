@@ -48,8 +48,8 @@ jobs:
           name: Collect test results
           command: |
             mvn jacoco:prepare-agent test jacoco:report
-            mkdir -p $CIRCLE_TEST_REPORTS/junit
-            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-            cp -r ./target/site/* $CIRCLE_TEST_REPORTS/
+            mkdir -p ~/junit
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+            cp -r ./target/site/* ~/
 
       - run: bash <(curl -s https://codecov.io/bash)
